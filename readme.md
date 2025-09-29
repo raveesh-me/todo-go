@@ -1,4 +1,5 @@
 # Dev process definition
+
 * you might have received a PRD
 
 * from the PRD you need to split FE and BE work
@@ -12,23 +13,11 @@
 
 * you will either write protos or you will update protos -- this will use c
 
-* 
-
-   
-
-
-
 ## JENKINS PIPELINE
 
 Triggers:
 
 * on pull request
 * on commit
-* 
-
-
 
 ## ARGO PIPELINE
-
-
-
