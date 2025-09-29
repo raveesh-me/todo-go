@@ -2,82 +2,36 @@ syntax = "proto3";
 
 package todo.v1;
 
-import "google/protobuf/timestamp.proto";
+option go_package = "github.com/yourorg/todo/gen/todov1";
 
-option go_package = "todo-go/gen/todo/v1;todov1";
-
-// Todo represents a single todo item
 message Todo {
   string id = 1;
   string title = 2;
-  string description = 3;
-  bool completed = 4;
-  google.protobuf.Timestamp created_at = 5;
-  google.protobuf.Timestamp updated_at = 6;
+  bool completed = 3;
 }
 
-// CreateTodoRequest represents the request to create a new todo
 message CreateTodoRequest {
   string title = 1;
-  string description = 2;
 }
 
-// CreateTodoResponse represents the response after creating a todo
 message CreateTodoResponse {
   Todo todo = 1;
 }
 
-// GetTodoRequest represents the request to get a specific todo
-message GetTodoRequest {
-  string id = 1;
-}
+message ListTodosRequest {}
 
-// GetTodoResponse represents the response containing a todo
-message GetTodoResponse {
-  Todo todo = 1;
-}
-
-// ListTodosRequest represents the request to list todos
-message ListTodosRequest {
-  int32 page_size = 1;
-  string page_token = 2;
-  bool completed = 3; // optional filter
-}
-
-// ListTodosResponse represents the response containing a list of todos
 message ListTodosResponse {
   repeated Todo todos = 1;
-  string next_page_token = 2;
 }
 
-// UpdateTodoRequest represents the request to update a todo
-message UpdateTodoRequest {
-  string id = 1;
-  string title = 2;
-  string description = 3;
-  bool completed = 4;
-}
-
-// UpdateTodoResponse represents the response after updating a todo
-message UpdateTodoResponse {
-  Todo todo = 1;
-}
-
-// DeleteTodoRequest represents the request to delete a todo
 message DeleteTodoRequest {
   string id = 1;
 }
 
-// DeleteTodoResponse represents the response after deleting a todo
-message DeleteTodoResponse {
-  bool success = 1;
-}
+message DeleteTodoResponse {}
 
-// TodoService defines the service for managing todos
 service TodoService {
   rpc CreateTodo(CreateTodoRequest) returns (CreateTodoResponse);
-  rpc GetTodo(GetTodoRequest) returns (GetTodoResponse);
   rpc ListTodos(ListTodosRequest) returns (ListTodosResponse);
-  rpc UpdateTodo(UpdateTodoRequest) returns (UpdateTodoResponse);
   rpc DeleteTodo(DeleteTodoRequest) returns (DeleteTodoResponse);
 }
